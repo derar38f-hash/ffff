@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Строй — Автоматические ворота и шлагбаумы в Астане 24/7</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f141c;
+      --surface: #171f2b;
+      --surface-hover: #1e2838;
+      --text: #f3f5f8;
+      --muted: #9aa4b2;
+      --accent: #f59e0b;
+      --accent-dark: #d97706;
+      --border: #283344;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Шапка */
+    header {
+      padding: 16px 0;
+      background: rgba(15, 20, 28, 0.94);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px);
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 20px; letter-spacing: 0.5px; text-transform: uppercase;
+    }
+    .logo span { color: var(--accent); }
+    .badge-24 {
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: var(--accent);
+      padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Первый экран */
+    .hero {
+      padding: 60px 0 46px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-top {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px;
+    }
+    .tag {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    }
+    .tag-star span { color: var(--accent); }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 5vw, 48px); line-height: 1.15;
+      max-width: 840px; margin-bottom: 18px;
+    }
+    .hero p {
+      color: var(--muted); max-width: 630px; font-size: 16px; margin-bottom: 30px;
+    }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      padding: 15px 26px; border-radius: 8px; font-weight: 700; font-size: 15px;
+      text-decoration: none; cursor: pointer; border: none; transition: 0.2s; display: inline-block;
+    }
+    .btn-primary { background: var(--accent); color: #111; }
+    .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    /* Инфо-блоки */
+    .info-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin: 36px 0 60px;
+    }
+    .info-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 20px; border-radius: 12px;
+    }
+    .info-card small { color: var(--muted); font-size: 13px; display: block; margin-bottom: 4px; }
+    .info-card strong { font-size: 15px; color: #fff; }
+
+    /* Услуги */
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(24px, 4vw, 34px); margin-bottom: 10px;
+    }
+    .sub-title { color: var(--muted); font-size: 15px; margin-bottom: 30px; }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px; margin-bottom: 64px;
+    }
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 24px; border-radius: 14px; display: flex; flex-direction: column;
+      justify-content: space-between; transition: 0.2s;
+    }
+    .card:hover { border-color: var(--accent); background: var(--surface-hover); }
+    .card-badge {
+      display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px; letter-spacing: 0.8px;
+    }
+    .card h3 { font-size: 18px; margin-bottom: 8px; color: #fff; }
+    .card p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .card-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .term { font-size: 13px; font-weight: 600; color: #34d399; }
+    .btn-sm {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+      padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .btn-sm:hover { background: var(--accent); border-color: var(--accent); color: #111; }
+
+    /* Отзывы */
+    .reviews-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px; margin-bottom: 64px;
+    }
+    .review-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 22px; border-radius: 14px;
+    }
+    .stars { color: var(--accent); font-size: 15px; margin-bottom: 8px; }
+    .review-text { font-size: 14px; margin-bottom: 12px; color: #e5e7eb; }
+    .review-author { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    /* Форма заявки */
+    .calc-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 34px 26px; margin-bottom: 64px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px;
+    }
+    .calc-info h2 { margin-bottom: 12px; }
+    .calc-info p { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+    .list { list-style: none; }
+    .list li {
+      margin-bottom: 10px; font-size: 14px; padding-left: 22px; position: relative;
+    }
+    .list li::before {
+      content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: 800;
+    }
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    input, select, textarea {
+      width: 100%; padding: 12px 14px; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-family: inherit; font-size: 14px;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    .btn-wa {
+      width: 100%; background: #25D366; color: #07190e; font-weight: 700;
+      padding: 15px; font-size: 15px; margin-top: 6px;
+    }
+    .btn-wa:hover { background: #1ebe5d; }
+
+    /* Подвал */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px 0;
+      text-align: center; font-size: 14px; color: var(--muted);
+    }
+    .demo-note {
+      margin-top: 14px; display: inline-block; background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3); color: var(--accent);
+      padding: 6px 14px; border-radius: 6px; font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Строй <span>Автоматика</span></div>
+    <div class="badge-24">Выезд 24/7 • Астана</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div class="tag tag-star"><span>★ 5.0</span> в 2ГИС</div>
+      <div class="tag">Монтаж • Автоматика • Срочный ремонт</div>
+    </div>
+    <h1>Установка и ремонт автоматических ворот и шлагбаумов в Астане</h1>
+    <p>Профессиональный монтаж откатных, секционных и распашных ворот, настройка пультов и шлагбаумов для частных домов, ЖК и предприятий. Круглосуточный выезд на устранение поломок.</p>
+    <div class="cta-row">
+      <a href="#order" class="btn btn-primary">Рассчитать или вызвать мастера</a>
+      <a href="tel:+77073029655" class="btn btn-secondary">+7 (707) 302-96-55</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="info-grid">
+    <div class="info-card">
+      <small>График работы и выезда</small>
+      <strong>Круглосуточно 24/7 без выходных</strong>
+    </div>
+    <div class="info-card">
+      <small>Адрес в Астане</small>
+      <strong>ул. Куляш Байсеитовой, 99 (м-н Агрогородок)</strong>
+    </div>
+    <div class="info-card">
+      <small>Оплата для частных лиц и ТОО</small>
+      <strong>Безнал через банк, QR-код, карта, наличные</strong>
+    </div>
+  </div>
+
+  <h2>Наши услуги</h2>
+  <p class="sub-title">Работаем с частными коттеджами, дворами ЖК, складами и коммерческими объектами</p>
+
+  <div class="services-grid">
+    <div class="card">
+      <div>
+        <div class="card-badge">Для дома и бизнеса</div>
+        <h3>Откатные и распашные ворота</h3>
+        <p>Изготовление, установка каркаса, монтаж электропривода и настройка плавного открывания с пульта.</p>
+      </div>
+      <div class="card-bottom">
+        <span class="term">● Монтаж под ключ</span>
+        <button class="btn-sm" onclick="selectTask('Установка откатных / распашных ворот')">Рассчитать</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-badge">Для гаражей и паркингов</div>
+        <h3>Секционные гаражные ворота</h3>
+        <p>Тёплые подъёмные ворота с надёжной автоматикой, защитой от обрыва и дистанционным управлением.</p>
+      </div>
+      <div class="card-bottom">
+        <span class="term">● Точный замер</span>
+        <button class="btn-sm" onclick="selectTask('Секционные гаражные ворота')">Рассчитать</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-badge">Для ЖК, дворов и офисов</div>
+        <h3>Автоматические шлагбаумы</h3>
+        <p>Установка скоростных и усиленных шлагбаумов, привязка пультов, GSM-модулей и фотоэлементов безопасности.</p>
+      </div>
+      <div class="card-bottom">
+        <span class="term">● Оплата через банк</span>
+        <button class="btn-sm" onclick="selectTask('Установка шлагбаума')">Рассчитать</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="card-badge">Срочно 24/7</div>
+        <h3>Ремонт ворот и автоматики</h3>
+        <p>Оперативный выезд мастера: диагностика приводов, замена роликов и реек, настройка плат и устранение заклинивания.</p>
+      </div>
+      <div class="card-bottom">
+        <span class="term">● Выезд в день обращения</span>
+        <button class="btn-sm" onclick="selectTask('Срочный ремонт ворот / шлагбаума')">Вызвать</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>Отзывы клиентов в 2ГИС</h2>
+  <p class="sub-title">Оценка 5.0 за пунктуальность и качество монтажных работ</p>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="review-text">«Честно сказать, ребята делают чётко, быстро, качественно! Молодцы, приехали и устранили поломку!»</div>
+      <div class="review-author">— Tom Feliks, отзыв в 2ГИС</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="review-text">«Монтаж жұмыстары өте сапалы жасалады. Қақпа мен пульт арқылы ашылатын шлагбаумды орнатып береді. Жұмысты уақытында әрі ұқыпты орындайды.»</div>
+      <div class="review-author">— Nursultan Alisher, отзыв в 2ГИС</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div class="review-text">«Знаю этих ребят уже три года, делают свою работу качественно, а самое главное — они пунктуальные, делают всё вовремя. Очень советую.»</div>
+      <div class="review-author">— Бауржан Байтасов, отзыв в 2ГИС</div>
+    </div>
+  </div>
+
+  <div class="calc-box" id="order">
+    <div class="calc-info">
+      <h2>Заявка на расчёт или выезд</h2>
+      <p>Выберите задачу — заявка сразу откроется в нашем WhatsApp для быстрой оценки стоимости и выезда инженера.</p>
+      <ul class="list">
+        <li>Работаем круглосуточно по всей Астане</li>
+        <li>Пунктуальное соблюдение сроков монтажа</li>
+        <li>Документы и безналичный расчёт для ОСИ, ЖК и ТОО</li>
+      </ul>
+    </div>
+
+    <form onsubmit="sendWA(event)">
+      <div class="form-group">
+        <label>Ваше имя или организация</label>
+        <input type="text" id="clientName" placeholder="Например, Ерлан / ОСИ Арман" required>
+      </div>
+      <div class="form-group">
+        <label>Что требуется</label>
+        <select id="taskSelect">
+          <option value="Установка откатных / распашных ворот">Установка откатных / распашных ворот</option>
+          <option value="Секционные гаражные ворота">Секционные гаражные ворота</option>
+          <option value="Установка шлагбаума">Установка шлагбаума</option>
+          <option value="Срочный ремонт ворот / шлагбаума">Срочный ремонт ворот / шлагбаума</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Тип объекта</label>
+        <select id="objSelect">
+          <option value="Частный дом / коттедж">Частный дом / коттедж</option>
+          <option value="ЖК / двор / ОСИ">ЖК / двор / ОСИ</option>
+          <option value="Склад / предприятие / паркинг">Склад / предприятие / паркинг</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ширина проёма или описание поломки</label>
+        <textarea id="details" rows="3" placeholder="Например: проём 4 метра, нужны откатные ворота с автоматикой" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-wa">Отправить заявку в WhatsApp</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div>Компания «Строй» • Автоматические ворота и шлагбаумы в Астане • ул. Куляш Байсеитовой, 99 • +7 (707) 302-96-55</div>
+    <div class="demo-note">Демо-концепт сайта подготовлен специально для компании «Строй» (@avto_vorota_kz)</div>
+  </div>
+</footer>
+
+<script>
+  function selectTask(task) {
+    document.getElementById('taskSelect').value = task;
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function sendWA(e) {
+    e.preventDefault();
+    const name = document.getElementById('clientName').value;
+    const task = document.getElementById('taskSelect').value;
+    const obj = document.getElementById('objSelect').value;
+    const details = document.getElementById('details').value;
+    const text = `Здравствуйте! Заявка с сайта по воротам/шлагбаумам.\nКлиент: ${name}\nЗадача: ${task}\nОбъект: ${obj}\nДетали: ${details}`;
+    window.open(`https://wa.me/77073029655?text=${encodeURIComponent(text)}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
